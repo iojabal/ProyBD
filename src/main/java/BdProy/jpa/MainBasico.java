@@ -20,7 +20,7 @@ public class MainBasico {
 
         try {
             Alumno cliente = new Alumno("Juanqui", "Perez");
-            repositorio.insertar(client);
+            repositorio.insertar(cliente);
 //            repositorio.actualizarNombre(cliente.getId(), "Juanqui");
 //			repositorio.eliminar(cliente.getId());
 
