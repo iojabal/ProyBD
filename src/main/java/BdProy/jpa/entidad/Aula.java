@@ -21,6 +21,8 @@ public class Aula implements Entidad {
     Aula(){
 
     }
+    @Version
+    private Integer version;
 
     public Aula(int numero, int capacidad){
         this.capacidad = capacidad;
@@ -39,5 +41,22 @@ public class Aula implements Entidad {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Aula{" +
+                "id='" + id + '\'' +
+                ", numero=" + numero +
+                ", capacidad=" + capacidad +
+                '}';
     }
 }

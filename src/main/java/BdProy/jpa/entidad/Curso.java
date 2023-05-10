@@ -7,8 +7,8 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="curso", uniqueConstraints = @UniqueConstraint(columnNames = {"codigo"}))
 public class Curso implements Entidad{
-    @Version
-    private Integer version;
+//    @Version
+//    private Integer version;
     @Id
     private String id = UUID.randomUUID().toString();
 
@@ -19,7 +19,7 @@ public class Curso implements Entidad{
     private int codigo;
 
     @OneToOne
-    @JoinColumn(name="id_aula")
+    @JoinColumn(name="aula_id")
     private Aula aula;
 
     @OneToOne(mappedBy = "curso")
@@ -29,9 +29,11 @@ public class Curso implements Entidad{
     public Curso() {
     }
 
-    public Curso(Aula aula, Asignatura asignatura){
+    public Curso(Aula aula, String turno, int codigo){
         this.aula = aula;
-        this.asignatura = asignatura;
+        this.turno = turno;
+        this.codigo = codigo;
+
     }
 
     @Override
@@ -67,5 +69,15 @@ public class Curso implements Entidad{
 
     public void setAsignatura(Asignatura asignatura) {
         this.asignatura = asignatura;
+    }
+
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "id='" + id + '\'' +
+                ", turno='" + turno + '\'' +
+                ", codigo=" + codigo +
+                ", aula=" + aula +
+                '}';
     }
 }

@@ -17,7 +17,7 @@ public class Alumno implements Entidad{
     @Column(name="apellido", nullable = false)
     private String apellido;
 
-    @ManyToMany(mappedBy = "alumnos")
+    @ManyToMany(mappedBy = "alumno")
     private List<Alumno_Asignatura> al;
 
     public Alumno() {
@@ -66,5 +66,13 @@ public class Alumno implements Entidad{
 
     public void setAl(List<Alumno_Asignatura> al) {
         this.al = al;
+    }
+
+    @Override
+    public String toString() {
+        return "Alumno{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + " " + apellido +
+                '}' + "\n";
     }
 }

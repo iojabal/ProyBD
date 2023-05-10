@@ -2,7 +2,6 @@ package BdProy.jpa.entidad;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.UUID;
 
@@ -12,15 +11,15 @@ public class Alumno_Asignatura implements Entidad {
     private String id = UUID.randomUUID().toString();
 
     @ManyToOne
-    private Alumno alumnos;
+    private Alumno alumno;
 
     @ManyToOne
     private Asignatura asignatura;
 
     public Alumno_Asignatura(Alumno alumnos, Asignatura asignatura) {
-        this.alumnos = alumnos;
+        this.alumno = alumnos;
         this.asignatura = asignatura;
-        this.alumnos.agregarInscripcion(this);
+        this.alumno.agregarInscripcion(this);
         this.asignatura.agregarInscripcion(this);
     }
 
@@ -37,11 +36,11 @@ public class Alumno_Asignatura implements Entidad {
     }
 
     public Alumno getAlumnos() {
-        return alumnos;
+        return alumno;
     }
 
     public void setAlumnos(Alumno alumnos) {
-        this.alumnos = alumnos;
+        this.alumno = alumnos;
     }
 
     public Asignatura getAsignatura() {
@@ -50,5 +49,14 @@ public class Alumno_Asignatura implements Entidad {
 
     public void setAsignatura(Asignatura asignatura) {
         this.asignatura = asignatura;
+    }
+
+    @Override
+    public String toString() {
+        return "Alumno_Asignatura{" +
+                "id='" + id + '\'' +
+                ", alumno=" + alumno +
+                ", asignatura=" + asignatura +
+                '}';
     }
 }

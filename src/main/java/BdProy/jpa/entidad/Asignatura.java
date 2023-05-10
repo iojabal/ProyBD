@@ -19,29 +19,39 @@ public class Asignatura implements Entidad {
     private int nro_horas;
 
     @OneToOne
-    @JoinColumn(name = "id_curso")
+    @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    @OneToMany(mappedBy = "asignatura")
-    private List<Profesor> profes = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "id_profesor")
+    private Profesor profe;
 
+    @Version
+    private Integer version;
     @ManyToMany
+    @JoinTable(name = "alumno_asignatura",
+            joinColumns = @JoinColumn(name = "asignatura_id"),
+            inverseJoinColumns = @JoinColumn(name = "alumno_id"))
     private List<Alumno_Asignatura> al;
 
-    public List<Profesor> getProfes() {
-        return profes;
+    public Profesor getProfe() {
+        return profe;
     }
 
-    public void setProfes(List<Profesor> profes) {
-        this.profes = profes;
+    public void setProfe(Profesor profe) {
+        this.profe = profe;
     }
 
     public Asignatura() {
     }
 
-    public Asignatura(String nombre, int nro_horas) {
+    public Asignatura(String nombre, int nro_horas, Curso curso, Profesor profe) {
         this.nombre = nombre;
         this.nro_horas = nro_horas;
+        this.curso = curso;
+
+        this.profe = profe;
+        profe.getAsignatura().add(this);
     }
 
     public void agregarInscripcion(Alumno_Asignatura ala) {
@@ -74,5 +84,16 @@ public class Asignatura implements Entidad {
 
     public void setNro_horas(int nro_horas) {
         this.nro_horas = nro_horas;
+    }
+
+    @Override
+    public String toString() {
+        return "Asignatura{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", nro_horas=" + nro_horas +
+                ", curso=" + curso +
+                ", profe=" + profe +
+                '}';
     }
 }

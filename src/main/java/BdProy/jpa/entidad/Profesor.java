@@ -1,6 +1,8 @@
 package BdProy.jpa.entidad;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 @Entity
 public class Profesor implements Entidad {
@@ -9,10 +11,9 @@ public class Profesor implements Entidad {
     private String id = UUID.randomUUID().toString();
 
 
-    @ManyToOne
-    @JoinColumn(name="id_asignatura")
-    private Asignatura asignatura;
 
+    @OneToMany(mappedBy = "profe")
+    private List<Asignatura> asignaturas = new ArrayList<>();
     @Column(name="nombre", nullable = false)
     private String nombre;
 
@@ -22,17 +23,17 @@ public class Profesor implements Entidad {
     public Profesor() {
     }
 
-    public Profesor(Asignatura asignatura) {
-        this.asignatura = asignatura;
-        this.asignatura.getProfes().add(this);
+    public Profesor(String nombre, String apellido) {
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
-    public Asignatura getAsignatura() {
-        return asignatura;
+    public List<Asignatura> getAsignatura() {
+        return asignaturas;
     }
 
-    public void setAsignatura(Asignatura asignatura) {
-        this.asignatura = asignatura;
+    public void setAsignatura(List<Asignatura> asignatura) {
+        this.asignaturas = asignatura;
     }
 
     public String getNombre() {
@@ -58,5 +59,14 @@ public class Profesor implements Entidad {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Profesor{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                '}';
     }
 }
